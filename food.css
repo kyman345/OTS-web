@@ -1,0 +1,148 @@
+﻿/* ===== Food Page Styles ===== */
+
+/* --- Hero --- */
+.food-hero {
+    min-height: 460px;
+    display: flex;
+    align-items: end;
+    background: linear-gradient(90deg, rgba(8,21,27,.86), rgba(8,21,27,.3)), url('assets/ots-hero.webp') center/cover;
+    color: #fff;
+}
+.food-hero-inner {
+    padding: 55px 22px;
+    max-width: 1160px;
+    margin: auto;
+    width: 100%;
+}
+.food-hero h1 {
+    font-size: clamp(36px, 5vw, 52px);
+    margin: 0 0 12px;
+    letter-spacing: -0.04em;
+    font-weight: 900;
+}
+.food-hero p {
+    max-width: 500px;
+    color: rgba(255,255,255,.85);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* --- Description --- */
+.food-desc {
+    padding: 40px 0 60px;
+}
+.food-desc p {
+    max-width: 700px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #53615f;
+}
+
+/* --- Catalog Section --- */
+.food-section {
+    padding: 0 0 60px;
+}
+.food-section .wrap {
+    max-width: 1160px;
+    margin: auto;
+    padding: 0 22px;
+}
+.food-section h2 {
+    font-size: clamp(24px, 3vw, 34px);
+    margin: 0 0 28px;
+    color: var(--navy);
+    font-weight: 900;
+}
+
+/* --- Food Grid (3 columns x 7 rows) --- */
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+.food-card {
+    position: relative;
+    overflow: hidden;
+    background: #ddd;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    text-align: left;
+    font: inherit;
+}
+.food-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s;
+}
+.food-card:hover img {
+    transform: scale(1.06);
+}
+.food-card:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(10,23,27,.65), transparent 55%);
+    pointer-events: none;
+}
+.food-card b {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    padding: 16px 18px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+.food-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+.food-modal[hidden] { 
+    display: none !important; 
+}
+
+.food-modal { 
+    position: fixed; 
+    inset: 0; 
+    z-index: 1000; 
+    display: grid; 
+    place-items: center; 
+    padding: 22px; 
+}
+.food-modal-backdrop { position: absolute; inset: 0; background: rgba(8,21,27,.78); }
+.food-modal-dialog { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; width: min(920px, 100%); max-height: min(620px, calc(100vh - 44px)); overflow: auto; background: var(--cream); box-shadow: 0 24px 70px rgba(0,0,0,.38); }
+.food-modal-image { min-height: 410px; background: #d9d6cc; }
+.food-modal-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.food-modal-content { padding: 54px 42px 38px; position: relative; }
+.food-modal-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--navy); color: #fff; font-size: 24px; cursor: pointer; }
+.food-modal-content .kicker { margin-bottom: 10px; }.food-modal-content h2 { margin: 0 0 18px; color: var(--navy); font-size: clamp(28px,4vw,42px); letter-spacing: -.05em; }.food-modal-content p { line-height: 1.8; color: #5e6b68; }.stall-info { margin: 25px 0 0; padding-top: 20px; border-top: 1px solid var(--line); }.stall-info div { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }.stall-info strong { display: inline-block; width: 80px; color: var(--navy); }
+
+/* --- Responsive --- */
+@media (max-width: 720px) {
+    .food-hero {
+        min-height: 360px;
+    }
+    .food-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .food-card b {
+        font-size: 14px;
+        padding: 12px 14px;
+    }
+    .food-modal-dialog { grid-template-columns: 1fr; max-width: 520px; }.food-modal-image { min-height: 250px; max-height: 300px; }.food-modal-content { padding: 38px 26px 30px; }
+}
+@media (max-width: 480px) {
+    .food-grid {
+        grid-template-columns: 1fr;
+    }
+    .food-card {
+        aspect-ratio: 16 / 9;
+    }
+}
