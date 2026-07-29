@@ -443,6 +443,7 @@ img {
     /* Show mobile-only visit button in header bar */
     .nav-visit-mobile {
         display: block;
+        font-weight: 600;
     }
 
     .site-footer .footer-inner {
