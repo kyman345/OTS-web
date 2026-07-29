@@ -1,0 +1,400 @@
+﻿/* ======================================================
+   Homepage-Only Styles (homepage.css)
+   Hero, food grid preview, music feature, map footer
+   Loaded ONLY by index.html
+   ====================================================== */
+
+/* --- Hero Section --- */
+.hero {
+    min-height: 660px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(90deg, rgba(8,21,27,.82) 0%, rgba(8,21,27,.62) 42%, rgba(8,21,27,.18) 100%),
+                url('assets/ots-hero.webp') center / cover no-repeat;
+}
+
+.hero-grid {
+    width: 100%;
+    display: block;
+}
+
+.hero-copy {
+    max-width: 665px;
+    color: #fff;
+    padding: 65px 0;
+}
+
+.hero-copy h1 {
+    margin: 15px 0 0;
+    font-size: clamp(54px, 7vw, 88px);
+    line-height: 1.04;
+    letter-spacing: -.08em;
+    font-weight: 900;
+    color: #fff;
+}
+
+.hero-copy h1 span {
+    color: #f0d6a0;
+}
+
+.hero-copy p {
+    font-size: 17px;
+    line-height: 1.9;
+    max-width: 465px;
+    margin: 27px 0;
+    color: rgba(255,255,255,.87);
+}
+
+.tagline {
+    font: 800 13px/1 'Nunito', sans-serif;
+    letter-spacing: .18em;
+    color: #e5c989;
+}
+
+.tagline i {
+    color: #e5c989;
+    font-style: normal;
+}
+
+/* --- Food Preview Section --- */
+.section {
+    padding: 92px 0;
+}
+
+.section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 34px;
+}
+
+.section h2 {
+    font-size: clamp(32px, 4vw, 47px);
+    line-height: 1.2;
+    letter-spacing: -.05em;
+    margin: 7px 0 0;
+    font-weight: 900;
+    color: var(--navy);
+}
+
+.section-head p {
+    max-width: 360px;
+    margin: 0;
+    color: #667270;
+    line-height: 1.75;
+}
+
+.section-head p .text-link {
+    display: block;
+    width: max-content;
+    margin-top: 13px;
+}
+
+.food-layout {
+    padding: 0 22px;
+    max-width: 1160px;
+    margin: auto;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr 1fr;
+    grid-template-rows: 220px 220px;
+    gap: 18px;
+}
+
+.food-card {
+    position: relative;
+    overflow: hidden;
+    background: #ddd;
+}
+
+.food-card:first-child {
+    grid-row: span 2;
+}
+
+.food-card img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform .35s;
+}
+
+.food-card:hover img {
+    transform: scale(1.04);
+}
+
+.food-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(10,23,27,.62), transparent 55%);
+}
+
+.food-card b {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    padding: 17px 18px;
+    font-size: 15px;
+    letter-spacing: .02em;
+}
+
+.food-more {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-top: 25px;
+    border-top: 1px solid var(--line);
+}
+
+.food-more p {
+    margin: 0;
+    color: #63716e;
+    font-size: 14px;
+}
+
+/* --- Music Feature Section --- */
+.music-feature {
+    padding: 88px 0;
+    background: #f4f1e9;
+    color: var(--navy);
+}
+
+.music-layout {
+    max-width: 1160px;
+    margin: auto;
+    padding: 0 22px;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 45px;
+    min-height: 0;
+}
+
+.music-photo {
+    min-height: 430px;
+    position: relative;
+    overflow: hidden;
+}
+
+.music-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.music-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(7,18,23,.45), transparent 62%);
+}
+
+.music-caption {
+    position: absolute;
+    z-index: 1;
+    bottom: 25px;
+    left: 28px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: #f2d69c;
+}
+
+.music-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+}
+
+.music-copy .kicker {
+    color: #914136;
+}
+
+.music-copy h2 {
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1.15;
+    letter-spacing: -.06em;
+    margin: 11px 0 18px;
+}
+
+.music-copy p {
+    line-height: 1.85;
+    color: #2e3130;
+    margin: 0 0 28px;
+}
+
+.music-copy .action {
+    align-self: flex-start;
+    background: #914136;
+    /* color: var(--navy) !important; */
+    margin-top: 30px;
+}
+
+.music-copy .action:hover {
+    background: var(--navy);
+}
+
+.event-list {
+    border-top: 1px solid var(--line);
+    /* margin: 30px 0 0; */
+}
+
+.event-item {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.event-date {
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.4;
+    color: var(--wine);
+    letter-spacing: .08em;
+}
+
+.event-item h3 {
+    font-size: 17px;
+    margin: 0 0 5px;
+}
+
+.event-item p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #62706d;
+    margin: 0;
+}
+
+/* --- Map Footer Section --- */
+.map-footer {
+    background: var(--navy);
+}
+
+.map-layout {
+    /* max-width: 1160px; */
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    min-height: 430px;
+}
+
+.map-copy {
+    padding: 66px 50px 58px 147.6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.map-copy h2 {
+    font-size: clamp(34px, 4vw, 50px);
+    line-height: 1.15;
+    letter-spacing: -.06em;
+    margin: 9px 0 18px;
+    color: #fff;
+}
+
+.map-copy p {
+    line-height: 1.75;
+    color: #b9c9c3;
+    margin: 0 0 18px;
+}
+
+.map-copy strong {
+    color: #f0d6a0;
+}
+
+.map-copy .kicker {
+    color: #e5c989;
+}
+
+.map-copy .text-link {
+    color: #f0d6a0;
+}
+
+.map-frame {
+    min-height: 430px;
+}
+
+.map-frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 430px;
+    border: 0;
+}
+
+/* --- Responsive: mobile only --- */
+@media (max-width: 720px) {
+    .hero {
+        min-height: 590px;
+        background-position: 58% center;
+    }
+
+    .hero-copy {
+        padding: 50px 0;
+    }
+
+    .hero-copy h1 {
+        font-size: 61px;
+    }
+
+    .section {
+        padding: 62px 0;
+    }
+
+    .section-head {
+        display: block;
+    }
+
+    .section-head p {
+        margin-top: 16px;
+    }
+
+    .food-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 160px 160px;
+    }
+
+    .food-card:first-child {
+        grid-column: span 2;
+        grid-row: auto;
+    }
+
+    .music-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .music-photo {
+        min-height: 300px;
+    }
+
+    .map-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .map-copy {
+        padding: 55px 22px;
+    }
+
+    .map-frame,
+    .map-frame iframe {
+        min-height: 350px;
+    }
+
+    .music-feature {
+    padding: 88px 0;
+    background: #f4f1e9;
+    color: var(--navy);
+    }
+}

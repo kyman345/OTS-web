@@ -1,0 +1,508 @@
+﻿/* ======================================================
+   Food Page Styles (food.css)
+   Hero, food grid/catalog
+   ====================================================== */
+
+/* --- Hero with background image --- */
+.food-hero {
+    min-height: 460px;
+    display: flex;
+    align-items: end;
+    background: linear-gradient(90deg, rgba(8,21,27,.86), rgba(8,21,27,.3)),
+                url('assets/ots-hero.webp') center / cover no-repeat;
+    color: #fff;
+}
+
+.food-hero-inner {
+    padding: 55px 22px;
+    max-width: 1160px;
+    margin: auto;
+    width: 100%;
+}
+
+.food-hero h1 {
+    font-size: clamp(36px, 5vw, 52px);
+    margin: 0 0 12px;
+    letter-spacing: -0.04em;
+    font-weight: 900;
+}
+
+.food-hero p {
+    max-width: 500px;
+    color: rgba(255,255,255,.85);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* --- Description --- */
+.food-desc {
+    padding: 40px 0 60px;
+}
+
+.food-desc p {
+    max-width: 700px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #53615f;
+}
+
+/* --- Catalog Section --- */
+.food-section {
+    padding: 0 0 60px;
+}
+
+.food-section .wrap {
+    max-width: 1160px;
+    margin: auto;
+    padding: 0 22px;
+}
+
+.food-section h2 {
+    font-size: clamp(24px, 3vw, 34px);
+    margin: 0 0 28px;
+    color: var(--navy);
+    font-weight: 900;
+}
+
+/* --- Food Grid (3 columns x 5 rows = 15 items) --- */
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.food-card {
+    position: relative;
+    overflow: hidden;
+    background: #ddd;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    text-align: left;
+    font: inherit;
+}
+
+.food-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s;
+}
+
+.food-card:hover img {
+    transform: scale(1.06);
+}
+
+.food-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(10,23,27,.65), transparent 55%);
+    pointer-events: none;
+}
+
+.food-card b {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    padding: 16px 18px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.food-card:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 720px) {
+    .food-hero {
+        min-height: 360px;
+    }
+
+    .food-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .food-card b {
+        font-size: 14px;
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .food-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .food-card {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* ======================================================
+   Food Modal (centered, large images, left slideshow with vertical centering)
+   IMPROVED: Larger photo display
+   ====================================================== */
+
+.food-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.food-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    width: 900px;
+    max-width: 90vw;
+    max-height: 85vh;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.food-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 500px;
+    align-items: center;
+    background: #FCFAF5;
+}
+
+.modal-image {
+    flex: 1.5;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    /* padding: 20px; */
+    min-height: 550px; /* ✅ 将原来的 400px 改大，和上面的高度保持一致 */
+}
+
+.image-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;       /* 保持你之前改的占满 */
+    height: 100%;      /* 保持你之前改的占满 */
+    max-width: 100%;   /* 保持你之前改的 100% */
+    max-height: 100%;  /* 保持你之前改的 100% */
+    object-fit: cover; /* 保持你之前改的 cover */
+    opacity: 0;
+    transition: opacity 0.4s ease; /* 修改这里：把 transform 0.4s ease 删掉，只留 opacity */ 
+    border-radius: 4px;
+}
+
+.slide.active {
+    opacity: 1; 
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: rgba(255, 255, 255, 0.385);
+    color: var(--navy);
+    font-size: 20px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn.prev {
+    left: 15px;
+}
+
+.nav-btn.next {
+    right: 15px;
+}
+
+.nav-btn:hover {
+    background: #fff;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-description {
+    flex: 1;
+    padding: 0px 25px; /* 增加内边距让留白更舒适 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #FCFAF5; /* 保持附图那种米白底色 */
+    overflow-y: auto;
+}
+
+.modal-kicker {
+    color: #9C3A27; /* 附图中的红棕色 */
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.modal-description h3 {
+    margin: 0 0 20px 0;
+    font-size: 42px; /* 调大标题字号匹配附图 */
+    color: #182A3A; /* 附图中的深藏青色 */
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.modal-intro {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #555;
+    margin: 0 0 35px 0;
+}
+
+/* --- Info List (底部分割线列表) --- */
+.modal-info-list {
+    border-top: 1px solid #E5E0D8; /* 顶部浅色分割线 */
+}
+
+.info-row {
+    display: flex;
+    padding: 18px 0;
+    border-bottom: 1px solid #E5E0D8; /* 底部浅色分割线 */
+}
+
+.info-label {
+    flex: 0 0 100px; /* 锁定左侧标签的宽度 */
+    font-weight: 800;
+    color: #182A3A;
+    font-size: 15px;
+}
+
+.info-value {
+    flex: 1;
+    color: #444;
+    font-size: 15px;
+}
+
+.meta {
+    font-size: 13px;
+    color: #888;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-description p {
+    margin: 0 0 25px 0;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #53615f;
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: var(--navy);
+    color: white;
+    font-size: 22px;
+    line-height: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.modal-close:hover {
+    background: #fff;
+    color: var(--navy);
+    transform: rotate(90deg) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .modal-layout {
+        flex-direction: column;
+        height: auto;
+        max-height: 90vh;
+        padding: 15px;
+    }
+
+    .modal-image {
+        flex: none;
+        height: 45vh;
+        max-height: 300px;
+        width: 100%;
+        position: relative;
+        min-height: 550px;
+    }
+    
+    .modal-description {
+        flex: none;
+        padding: 20px;
+        height: auto;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+
+    .modal-content {
+        max-width: 95vw;
+        max-height: 95vh;
+        margin: 10px 30px;
+    }
+    
+    .modal-close {
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      font-size: 20px;
+    }
+    
+    .nav-btn {
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+    }
+    
+    .nav-btn.prev {
+      left: 10px;
+    }
+    
+    .nav-btn.next {
+      right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-layout {
+        height: auto;
+    }
+
+    .modal-kicker {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    .modal-description h3 {
+        font-size: 30px; 
+        margin-bottom: 15px; 
+    }
+
+    .modal-image {
+        height: 40vh;
+        min-height: 300px;
+        /* padding: 10px; */
+    }
+    
+    .meta {
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .modal-description p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+    
+    .nav-btn {
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+    }
+    
+    .nav-btn.prev {
+      left: 8px;
+    }
+    
+    .nav-btn.next {
+      right: 8px;
+    }
+}
+
+/* Cross-fade slide animation for images */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(80px);
+    }
+}

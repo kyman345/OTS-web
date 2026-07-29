@@ -1,0 +1,495 @@
+﻿<!doctype html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OTS 美食目录 — 探索 OTS Food Court 的美食选择">
+  <title>吃什么 | OTS 揾到食</title>
+  <link rel="icon" type="image/png" href="assets/ots-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="food.css">
+</head>
+
+<body>
+  <header class="top" id="top">
+    <nav class="wrap nav">
+      <div class="nav-left">
+        <button class="hamburger" id="menuBtn" aria-label="菜单">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <a class="brand" href="index.html" aria-label="OTS 揾到食">
+          <img src="assets/ots-logo.png" alt="OTS 揾到食 Beer Music Food">
+        </a>
+      </div>
+      <div class="links">
+        <a href="index.html">首页</a>
+        <a href="food.html">吃什么</a>
+        <a href="music.html">今晚节目</a>
+        <a href="contact.html">联系我们</a>
+        <a class="visit" href="index.html#find-us">我要去 OTS &rarr;</a>
+      </div>
+      <div class="nav-visit-mobile"><a class="visit" href="index.html#find-us">我要去 OTS &rarr;</a></div>
+    </nav>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="closeMobileMenu()" aria-label="关闭菜单"></button>
+    <div class="mobile-menu-inner">
+      <a href="index.html">首页</a>
+      <a href="food.html">吃什么</a>
+      <a href="music.html">今晚节目</a>
+      <a href="contact.html">联系我们</a>
+      <a class="visit" href="index.html#find-us">我要去 OTS &rarr;</a>
+      <div class="mobile-social">
+        <a href="https://www.facebook.com/OtsFoodFactory" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M18 2h-3a4 4 0 0 0-4 4v3H5v4h3v8h4v-8h3l1-4h-4V6a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/ots_foodfactory/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="tel:+60166655996" aria-label="Phone">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="food-hero">
+      <div class="food-hero-inner">
+        <div class="kicker">EXPLORE THE MENU</div>
+        <h1>一桌子的选择。</h1>
+        <p>饭、面、小吃、烧烤、甜品到啤酒；各自点喜欢的，一起坐下来慢慢吃。</p>
+      </div>
+    </section>
+
+    <section class="food-desc">
+      <div class="wrap">
+        <p>从热腾腾的啦啦米粉、香口猪扒，到寿司、煎饺、肉骨茶—OTS 为大家准备了各式各样的选择。不管是一个人来吃，还是一群人聚餐，都能找到喜欢的味道。</p>
+      </div>
+    </section>
+
+    <section class="food-section">
+      <div class="wrap">
+        <div class="kicker">FOOD CATALOG</div>
+        <h2>想吃的，这里都有。</h2>
+        <div class="food-grid">
+
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/chicken-rice.jpeg" alt="海南鸡饭">
+            <b>海南鸡饭</b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/nasi-lemak.png" alt="老三椰浆饭">
+            <b>老三椰浆饭</b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/ayam-penyet.jpeg" alt="印尼炸鸡饭">
+            <b>印尼炸鸡饭</b>
+          </article>
+
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/japanese-rice.png" alt="鮨匠 Shokunin Nihonryori">
+            <b>鮨匠 Shokunin Nihonryori</b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/rou-geng-tang.jpeg" alt="苦瓜猪杂汤">
+            <b>苦瓜猪杂汤</b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/jiangxi.png" alt="中国江西小炒">
+            <b>中国江西小炒</b>
+          </article>
+
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/mianfengao.png" alt="面粉糕 板面">
+            <b>面粉糕 板面</b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/chicken-wing.png" alt="烧鸡翅">
+            <b>烧鸡翅</b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="assets/fried-prawn-noodles.png" alt="面粉糕 炸虾面">
+            <b>面粉糕 炸虾面</b>
+          </article>
+
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="" alt="">
+            <b></b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="" alt="">
+            <b></b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="" alt="">
+            <b></b>
+          </article>
+
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="" alt="">
+            <b></b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="" alt="">
+            <b></b>
+          </article>
+          <article class="food-card" onclick="openFoodModal(this)">
+            <img src="" alt="">
+            <b></b>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="food-modal" id="foodModal" onclick="closeFoodModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeFoodModal()" aria-label="关闭">&times;</button>
+      <div class="modal-layout">
+        <div class="modal-image">
+          <div class="image-slideshow">
+            <img class="slide" src="" alt="" data-index="0">
+            <img class="slide" src="" alt="" data-index="1">
+            <img class="slide" src="" alt="" data-index="2">
+          </div>
+          <button class="nav-btn prev" onclick="prevSlide()">&#10094;</button>
+          <button class="nav-btn next" onclick="nextSlide()">&#10095;</button>
+        </div>
+        <div class="modal-description">
+          <div class="modal-kicker">OTS FOOD CATALOG</div>
+          <h3 class="modal-title" id="modalTitle"></h3>
+          <p id="modalDesc" class="modal-intro"></p>
+          
+          <div class="modal-info-list">
+            <div class="info-row">
+              <span class="info-label">营业时间</span>
+              <div class="info-value">
+                <div id="modalDays" style="margin-bottom: 4px;"></div>
+                <div id="modalHours"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="assets/ots-logo.png" alt="OTS"></div>
+        <span>揾到食 · Beer · Music · Food</span>
+      </div>
+      <div class="footer-social">
+        <a class="social-link" href="https://www.facebook.com/OtsFoodFactory" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbe4df" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a4 4 0 0 0-4 4v3H5v4h3v8h4v-8h3l1-4h-4V6a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a class="social-link" href="https://www.instagram.com/ots_foodfactory/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbe4df" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a class="social-link" href="tel:+60166655996" aria-label="Phone">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dbe4df" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </a>
+        <a class="contact-btn" href="contact.html">联系我们</a>
+      </div>
+      <span>&copy; OTS Food Court</span>
+    </div>
+  </footer>
+
+ <!-- ============================================================== -->
+  <!-- 完整的 JavaScript 逻辑 (包括 Modal 弹窗、轮播图与移动端菜单) -->
+  <!-- ============================================================== -->
+  <script>
+    // --- 1. 菜品数据源 ---
+    // 你可以在这里为特定菜品单独加上 "hours" 和 "days" 属性。
+    // 如果不加，代码会自动显示默认的时间和天数。
+    const foodDescriptions = {
+      "海南鸡饭": {
+        "desc": "", 
+        "images": ["assets/chicken-rice-menu.png", "assets/chicken-rice.jpeg", "assets/"],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      },
+      "老三椰浆饭": {
+        "desc": "", 
+        "images": ["", "", ""],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      },
+      "印尼炸鸡饭": {
+        "desc": "", 
+        "images": ["", "", ""],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      },
+      "鮨匠 Shokunin Nihonryori": {
+        "desc": "", 
+        "images": ["", "", ""],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      },
+      "苦瓜猪杂汤": {
+        "desc": "", 
+        "images": ["", "", ""],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      },
+      "中国江西小炒": {
+        "desc": "", 
+        "images": ["", "", ""],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      },
+      "面粉糕 板面": {
+        "desc": "", 
+        "images": ["", "", ""],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      },
+      "烧鸡翅": {
+        "desc": "", 
+        "images": ["", "", ""],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      },
+      "面粉糕 炸虾面": {
+        "desc": "", 
+        "images": ["", "", ""],
+        "hours": "10:00 AM — 9:00 PM",
+        "days": "星期一至星期日"
+      }
+    };
+
+    // --- 2. 弹窗与轮播图逻辑 ---
+    var currentSlideIndex = 0;
+    var slideshowImages = [];
+    var slideInterval = null;
+
+    function startAutoSlide() {
+      if (slideInterval) clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 3000);
+    }
+
+    function stopAutoSlide() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+        slideInterval = null;
+      }
+    }
+
+    function openFoodModal(card) {
+      var title = card.querySelector('b').textContent.trim();
+      var cardImg = card.querySelector('img').src; // 提取封面图备用
+      var modal = document.getElementById('foodModal');
+      var modalTitle = document.getElementById('modalTitle');
+      var modalDesc = document.getElementById('modalDesc');
+      var slides = document.querySelectorAll('.slide');
+      
+      // 安全机制：如果标题为空或者字典里没配置这个菜，自动提供默认内容
+      var descData = foodDescriptions[title] || {
+        "desc": title ? `想吃这一档？来 OTS 现场看看，档口会准备更多 ${title} 的选择等你发现。` : "档口筹备中，敬请期待！",
+        "images": [cardImg || "", "", ""],
+      };
+      
+      modalTitle.textContent = title || "即将推出";
+      modalDesc.textContent = descData.desc;
+      
+      // 动态注入时间与天数 (如果没有填，使用默认值)
+      document.getElementById('modalHours').innerHTML = descData.hours || "";
+      document.getElementById('modalDays').textContent = descData.days || "";
+
+      slideshowImages = descData.images;
+      currentSlideIndex = 0;
+      
+      slides.forEach(function(img, index) {
+        if (index < slideshowImages.length && slideshowImages[index]) {
+          img.src = slideshowImages[index];
+          img.alt = title + " - " + (index + 1);
+          img.classList.remove('active');
+          img.style.opacity = '0';
+          img.style.transform = ""; // 清除可能残留的变换
+        } else {
+          // 如果没有足够的图片，隐藏该元素
+          img.src = "";
+          img.style.opacity = '0';
+        }
+      });
+      
+      if (slides[0] && slides[0].src && !slides[0].src.endsWith(window.location.host + "/")) {
+        slides[0].classList.add('active');
+        slides[0].style.opacity = '1';
+      }
+      
+      setTimeout(() => {
+        startAutoSlide();
+      }, 500);
+      
+      modal.classList.remove('active');
+      void modal.offsetWidth; // 触发重绘
+      
+      setTimeout(() => {
+        modal.classList.add('active');
+      }, 10);
+      
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFoodModal() {
+      var modal = document.getElementById('foodModal');
+      stopAutoSlide();
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextSlide() {
+      var slides = document.querySelectorAll('.slide');
+      // 过滤掉没有 src 链接的占位图
+      var validSlides = Array.from(slides).filter(img => img.src && !img.src.endsWith(window.location.host + "/"));
+      if (validSlides.length <= 1) return;
+      
+      var current = slides[currentSlideIndex];
+      currentSlideIndex = (currentSlideIndex + 1) % validSlides.length;
+      var next = validSlides[currentSlideIndex];
+      
+      current.style.transition = 'opacity 0.5s ease';
+      current.style.opacity = '0';
+      
+      setTimeout(function() {
+        next.style.transition = 'opacity 0.5s ease';
+        next.style.opacity = '0';
+        void next.offsetWidth;
+        next.style.opacity = '1';
+      }, 250);
+    }
+
+    function prevSlide() {
+      var slides = document.querySelectorAll('.slide');
+      var validSlides = Array.from(slides).filter(img => img.src && !img.src.endsWith(window.location.host + "/"));
+      if (validSlides.length <= 1) return;
+      
+      stopAutoSlide();
+      setTimeout(startAutoSlide, 5000);
+      
+      var current = validSlides[currentSlideIndex];
+      currentSlideIndex = (currentSlideIndex - 1 + validSlides.length) % validSlides.length;
+      var prev = validSlides[currentSlideIndex];
+      
+      current.style.transition = 'opacity 0.5s ease';
+      current.style.opacity = '0';
+      
+      setTimeout(function() {
+        prev.style.transition = 'opacity 0.5s ease';
+        prev.style.opacity = '0';
+        void prev.offsetWidth;
+        prev.style.opacity = '1';
+      }, 250);
+    }
+
+    // --- 3. 全局事件监听 ---
+    document.addEventListener('DOMContentLoaded', function() {
+      var slideshow = document.querySelector('.image-slideshow');
+      if (slideshow) {
+        slideshow.addEventListener('mouseleave', function() {
+          if (document.getElementById('foodModal').classList.contains('active')) {
+            startAutoSlide();
+          }
+        });
+        slideshow.addEventListener('mouseenter', function() {
+          stopAutoSlide();
+        });
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      var modal = document.getElementById('foodModal');
+      if (modal && modal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+          closeFoodModal();
+          e.preventDefault();
+        } else if (e.key === 'ArrowRight') {
+          nextSlide();
+          e.preventDefault();
+        } else if (e.key === 'ArrowLeft') {
+          prevSlide();
+          e.preventDefault();
+        }
+      }
+    });
+
+    // --- 4. 移动端导航栏菜单逻辑 ---
+    var menuBtn = document.getElementById('menuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+        if (mobileMenu.classList.contains('open')) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = '';
+        }
+      });
+
+      mobileMenu.addEventListener('click', function(e) {
+        if (e.target === this || e.target.classList.contains('mobile-close') || e.target === mobileMenu) {
+          closeMenu();
+        }
+      });
+    }
+
+    function closeMenu() {
+      if (menuBtn) menuBtn.classList.remove('active');
+      if (mobileMenu) mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeMobileMenu() {
+      closeMenu();
+    }
+
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 720) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeMenu(); // 支持按 Esc 退出移动端菜单
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
