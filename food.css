@@ -281,7 +281,7 @@
 
 .modal-description {
     flex: 1;
-    padding: 0px 25px; /* 增加内边距让留白更舒适 */
+    padding: 0px 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -403,7 +403,9 @@
     
     .modal-description {
         flex: none;
-        padding: 20px;
+        margin: 15px 0;
+        padding: 0px;
+        width: 90%;
         height: auto;
         max-height: 50vh;
         overflow-y: auto;
