@@ -90,76 +90,8 @@
           <p>选好你的晚上，和朋友来 OTS 吃饭、喝一杯、听好歌。演出安排以现场公告为准。</p>
         </div>
 
-        <div class="show-list">
-
-          <!-- Row 1 — Sunday -->
-          <article class="show-row">
-            <div class="show-poster" onclick="openPoster(this)">
-              <img src="assets/performance-chen-muchinged.jpeg" alt="Chen Muchinged 周日演出" loading="lazy">
-              <span class="poster-hint">点击查看完整海报</span>
-            </div>
-            <div class="show-body">
-              <div class="show-meta">
-                <span class="show-day">周日</span>
-                <span class="show-time">7:00 PM — 9:30 PM</span>
-              </div>
-              <h3>MUSIC SOCIETY</h3>
-              <p class="show-desc">灵魂嗓音 × 经典翻唱，用故事唱进你心里</p>
-              <a class="show-book" href="tel:+60166655996">订位：016-665 5996 →</a>
-            </div>
-          </article>
-
-          <!-- Row 2 — Tuesday -->
-          <article class="show-row">
-            <div class="show-poster" onclick="openPoster(this)">
-              <img src="assets/performance-cindy-jenee.jpeg" alt="Cindy & Jenee 周二演出" loading="lazy">
-              <span class="poster-hint">点击查看完整海报</span>
-            </div>
-            <div class="show-body">
-              <div class="show-meta">
-                <span class="show-day">周二</span>
-                <span class="show-time">8:30 PM — 11:30 PM</span>
-              </div>
-              <h3>Cindy &amp; Jenee</h3>
-              <p class="show-desc">双女主声线对决，一首一首唱到你点头</p>
-              <a class="show-book" href="tel:+60166655996">订位：016-665 5996 →</a>
-            </div>
-          </article>
-
-          <!-- Row 3 — Wednesday -->
-          <article class="show-row">
-            <div class="show-poster" onclick="openPoster(this)">
-              <img src="assets/performance-alan-shika.jpeg" alt="Alan & Shika 周三演出" loading="lazy">
-              <span class="poster-hint">点击查看完整海报</span>
-            </div>
-            <div class="show-body">
-              <div class="show-meta">
-                <span class="show-day">周三</span>
-                <span class="show-time">8:30 PM — 11:30 PM</span>
-              </div>
-              <h3>Alan &amp; Shika</h3>
-              <p class="show-desc">男女对唱组合，温柔又带点浪漫的夜晚</p>
-              <a class="show-book" href="tel:+60166655996">订位：016-665 5996 →</a>
-            </div>
-          </article>
-
-          <!-- Row 4 — Friday -->
-          <article class="show-row">
-            <div class="show-poster" onclick="openPoster(this)">
-              <img src="assets/performance-ringy-wonderful.jpeg" alt="Ringy & Wonderful 周五演出" loading="lazy">
-              <span class="poster-hint">点击查看完整海报</span>
-            </div>
-            <div class="show-body">
-              <div class="show-meta">
-                <span class="show-day">周五</span>
-                <span class="show-time">8:30 PM — 11:30 PM</span>
-              </div>
-              <h3>Ringy &amp; Wonderful</h3>
-              <p class="show-desc">周末狂欢开场，摇滚 × 流行 × 经典老歌</p>
-              <a class="show-book" href="tel:+60166655996">订位：016-665 5996 →</a>
-            </div>
-          </article>
-
+        <div class="show-list" id="dynamicShowList">
+          <!-- 这里面原本的 <article> 全删掉，留空即可 -->
         </div>
 
         <div class="shows-note">
@@ -285,6 +217,65 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         closeMenu();
+      }
+    });
+
+    // 【重要】填入你之前在 food.html 里用过的同一个 Project ID 和 Dataset
+    const PROJECT_ID = 'kp5rkziu'; 
+    const DATASET = 'production'; 
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      const showList = document.getElementById('dynamicShowList');
+      
+      if (showList) {
+        // 使用 GROQ 查询演出数据，按 order 字段升序排列
+        const query = encodeURIComponent(`*[_type == "showItem"] | order(order asc) {
+          bandName,
+          description,
+          "posterUrl": poster.asset->url,
+          day,
+          time
+        }`);
+        
+        const url = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${query}`;
+
+        try {
+          const response = await fetch(url);
+          const { result } = await response.json();
+
+          showList.innerHTML = ''; // 清空可能存在的加载状态
+
+          result.forEach(show => {
+            const article = document.createElement('article');
+            article.className = 'show-row';
+            
+            // 构建 HTML 结构，完美保留你原本的 CSS 样式和 openPoster 函数逻辑
+            article.innerHTML = `
+              <div class="show-poster" onclick="openPoster(this)">
+                <img src="${show.posterUrl || ''}" alt="${show.bandName} 演出" loading="lazy">
+                <span class="poster-hint">点击查看完整海报</span>
+              </div>
+              <div class="show-body">
+                <div class="show-meta">
+                  <span class="show-day">${show.day || '未定'}</span>
+                  <span class="show-time">${show.time || '时间待定'}</span>
+                </div>
+                <h3>${show.bandName}</h3>
+                <p class="show-desc">${show.description || ''}</p>
+                <a class="show-book" href="tel:+60166655996">订位：016-665 5996 →</a>
+              </div>
+            `;
+            showList.appendChild(article);
+          });
+          
+          if(result.length === 0){
+             showList.innerHTML = '<p style="text-align:center; padding: 2rem;">本周演出安排筹备中，敬请期待！</p>';
+          }
+
+        } catch (error) {
+          console.error('获取演出数据失败:', error);
+          showList.innerHTML = '<p style="text-align:center; padding: 2rem;">节目单加载中，请稍后再试...</p>';
+        }
       }
     });
   </script>
