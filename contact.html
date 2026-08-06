@@ -84,13 +84,8 @@
           </div>
           <p>不要错过 OTS 的限时优惠与每周活动，欢迎和朋友一起来享受。</p>
         </div>
-        <div class="updates-grid">
-          <a class="update-poster" href="assets/ots-free-teh-beng.png" target="_blank" rel="noopener">
-            <img src="assets/ots-free-teh-beng.png" alt="OTS 午餐时段免费 Teh Beng 活动海报">
-          </a>
-          <a class="update-poster" href="assets/ots-ladies-night.png" target="_blank" rel="noopener">
-            <img src="assets/ots-ladies-night.png" alt="OTS Ladies Night 每周三活动海报">
-          </a>
+        <div class="updates-grid" id="dynamicUpdatesGrid">
+          <!-- 动态资讯海报将从 CMS 加载 -->
         </div>
         <div class="member-group">
           <div>
@@ -108,9 +103,8 @@
     <section class="contact-body">
       <div class="wrap">
         <div class="info-grid">
-
-          <!-- Left Column -->
-          <div class="contact-info">
+          <!-- 左列 -->
+          <div class="contact-info-col">
             <div class="info-card">
               <h3>&#128205; 地址</h3>
               <p>Jalan IMP 1, Taman Merdeka Permai,<br>75350 Batu Berendam, Melaka</p>
@@ -118,6 +112,14 @@
               <p>每天 12:00 PM — 12:00 AM</p>
             </div>
             <div class="info-card" style="margin-top:24px">
+              <h3>&#128507; 导航</h3>
+              <p><a class="action" href="https://maps.app.goo.gl/Sji7okdZKGk3TTWt8" target="_blank"
+                  rel="noopener">在 Google Maps 打开 →</a></p>
+            </div>
+          </div>
+          <!-- 右列 -->
+          <div class="contact-info-col">
+            <div class="info-card">
               <h3>&#128222; 联系方式</h3>
               <p class="phone-big"><a href="tel:+60166655996">016-665 5996</a></p>
               <p>电话 / WhatsApp</p>
@@ -127,40 +129,8 @@
               <p>Instagram: <a href="https://www.instagram.com/ots_foodfactory/" target="_blank" rel="noopener"
                   style="color:var(--wine);font-weight:700">@ots_foodfactory →</a></p>
             </div>
-            <div class="info-card" style="margin-top:24px">
-              <h3>&#128507; 导航</h3>
-              <p><a class="action" href="https://maps.app.goo.gl/Sji7okdZKGk3TTWt8" target="_blank"
-                  rel="noopener">在 Google Maps 打开 →</a></p>
-            </div>
           </div>
-
-          <!-- Right Column -->
-          <div>
-            <div class="recruit-card">
-              <h3>&#127881; 创业伙伴招募中！</h3>
-              <p>想创业，却不知道从哪里开始？没经验，也有机会拥有自己的生意！</p>
-              <ul>
-                <li>低门槛创业，无需高额投资</li>
-                <li>总部提供资源：场地、设备、供应链</li>
-                <li>成熟配方与产品支持</li>
-                <li>全程陪跑，降低创业风险</li>
-                <li>利润归你经营，专注经营，利润共享</li>
-              </ul>
-              <p style="margin-top:16px"><strong>适合人群：</strong>上班族、毕业生、家庭主妇、想转换跑道的人</p>
-              <p style="margin-top:14px">
-                <a class="action" href="https://wa.me/60143609061" target="_blank" rel="noopener"
-                  style="background:var(--gold);color:var(--navy)">立即 WhatsApp：014-360 9061</a>
-              </p>
-            </div>
-            <div class="info-card" style="margin-top:24px">
-              <h3>&#128666; 招聘洗碗员工</h3>
-              <p><strong>主要职责：</strong>负责清洗餐具、厨具及保持工作区域整洁卫生</p>
-              <p><strong>工作环境：</strong>干净、团队友善、工作稳定</p>
-              <p><strong>工作时间：</strong>轮班制、弹性安排</p>
-              <p style="margin-top:10px;color:var(--wine);font-weight:700">本地马来西亚人优先</p>
-              <p style="margin-top:14px"><a class="action" href="tel:+60166655996">电话咨询：016-665 5996</a></p>
-            </div>
-          </div>
+        </div>
 
         </div>
       </div>
@@ -170,9 +140,8 @@
     <section class="poster-section">
       <div class="wrap">
         <h2>了解更多详情</h2>
-        <div class="poster-grid">
-          <img src="assets/ots-stall-recruitment.png" alt="创业伙伴招募海报">
-          <img src="assets/ots-job-recruitment.png" alt="招聘洗碗员工海报">
+        <div class="poster-grid" id="dynamicPosterGrid">
+          <!-- 动态招募海报将从 CMS 加载 -->
         </div>
       </div>
     </section>
@@ -265,6 +234,48 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
         closeMenu();
+      }
+    });
+
+  <!-- ===== 从 Sanity 动态获取海报数据 ===== -->
+    const PROJECT_ID = '这里填你的ProjectID'; 
+    const DATASET = 'production'; 
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      // 1. 获取最新资讯 (Updates)
+      const updatesGrid = document.getElementById('dynamicUpdatesGrid');
+      if (updatesGrid) {
+        const query = encodeURIComponent(`*[_type == "updateItem"] | order(_createdAt desc) { title, "posterUrl": poster.asset->url, linkUrl }`);
+        fetch(`https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${query}`)
+          .then(res => res.json())
+          .then(({ result }) => {
+            updatesGrid.innerHTML = '';
+            result.forEach(item => {
+              // 兼容有链接和无链接的两种情况
+              const innerHTML = `<img src="${item.posterUrl}" alt="${item.title || '最新资讯'}">`;
+              if (item.linkUrl) {
+                updatesGrid.innerHTML += `<a class="update-poster" href="${item.linkUrl}" target="_blank" rel="noopener">${innerHTML}</a>`;
+              } else {
+                updatesGrid.innerHTML += `<div class="update-poster">${innerHTML}</div>`;
+              }
+            });
+          })
+          .catch(err => console.error('获取资讯失败:', err));
+      }
+
+      // 2. 获取了解更多海报 (Posters)
+      const posterGrid = document.getElementById('dynamicPosterGrid');
+      if (posterGrid) {
+        const query = encodeURIComponent(`*[_type == "posterItem"] | order(_createdAt desc) { title, "posterUrl": poster.asset->url }`);
+        fetch(`https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${query}`)
+          .then(res => res.json())
+          .then(({ result }) => {
+            posterGrid.innerHTML = '';
+            result.forEach(item => {
+              posterGrid.innerHTML += `<img src="${item.posterUrl}" alt="${item.title || '招募海报'}">`;
+            });
+          })
+          .catch(err => console.error('获取招募海报失败:', err));
       }
     });
   </script>
