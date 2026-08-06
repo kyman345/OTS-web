@@ -76,79 +76,15 @@
     </section>
 
     <section class="food-section">
-      <div class="wrap">
-        <div class="kicker">FOOD CATALOG</div>
-        <h2>想吃的，这里都有。</h2>
-        <div class="food-grid">
-
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/chicken-rice.jpeg" alt="海南鸡饭">
-            <b>海南鸡饭</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/nasi-lemak.png" alt="老三椰浆饭">
-            <b>老三椰浆饭</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/ayam-penyet.png" alt="印尼炸鸡饭">
-            <b>印尼炸鸡饭</b>
-          </article>
-
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/sushi.png" alt="鮨匠 Shokunin Nihonryori">
-            <b>鮨匠 Shokunin Nihonryori</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/rou-geng-tang.png" alt="">
-            <b>苦瓜猪杂汤</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/jiangxi.png" alt="中国江西小炒">
-            <b>中国江西小炒</b>
-          </article>
-
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/mianfengao.png" alt="面粉糕 板面">
-            <b>面粉糕 板面</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/satay.png" alt="Ah Chin Satay">
-            <b>Ah Chin Satay</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/chicken-wing.png" alt="烧鸡翅">
-            <b>烧鸡翅</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/fried-prawn-noodles.png" alt="面粉糕 炸虾面">
-            <b>面粉糕 炸虾面</b>
-          </article>
-
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/chuanchuan.png" alt="串串小子">
-            <b>串串小子</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/wantan.png" alt="云吞面">
-            <b>云吞面</b>
-          </article>
-
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/oyster-fried.png" alt="五香烧卖 蚝煎">
-            <b>五香烧卖 蚝煎</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="assets/stir-fry.png" alt="新口味煮炒">
-            <b>新口味煮炒</b>
-          </article>
-          <article class="food-card" onclick="openFoodModal(this)">
-            <img src="" alt="">
-            <b></b>
-          </article>
-
-        </div>
-      </div>
-    </section>
+  <div class="wrap">
+    <div class="kicker">FOOD CATALOG</div>
+    <h2>想吃的，这里都有。</h2>
+    <!-- 清空里面写死的卡片，留空即可 -->
+    <div class="food-grid" id="dynamicFoodGrid">
+        
+    </div>
+  </div>
+</section>
   </main>
 
   <div class="food-modal" id="foodModal" onclick="closeFoodModal()">
@@ -227,95 +163,61 @@
   <!-- 完整的 JavaScript 逻辑 (包括 Modal 弹窗、轮播图与移动端菜单) -->
   <!-- ============================================================== -->
   <script>
-    // --- 1. 菜品数据源 ---
-    // 你可以在这里为特定菜品单独加上 "hours" 和 "days" 属性。
-    // 如果不加，代码会自动显示默认的时间和天数。
-    const foodDescriptions = {
-      "海南鸡饭": {
-        "desc": "档口专营传统海南鸡饭，鸡肉鲜嫩滑口，米饭香浓入味。更有精心熬制的鸡丝粥与滑鸡粥，绵密顺滑、暖胃鲜香。用料实在，做法讲究，为您带来最纯粹的家常美味！", 
-        "images": ["assets/chicken-rice-menu.png", "assets/chicken-rice.jpeg", "assets/chicken-porridge.png", "assets/chicken-stall.jpeg"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "老三椰浆饭": {
-        "desc": "浓郁椰香米饭搭配独门秘制参巴酱（Sambal），香辣开胃、回味无穷。搭配香脆花生、江鱼仔与水煮蛋，为您呈现最纯粹地道的南洋传统风味！", 
-        "images": ["", "assets/nasi-lemak.png", ""],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "印尼炸鸡饭": {
-        "desc": "香料深度腌制，黄金炸鸡外酥里嫩、肉汁满满。蘸上现捣特制印尼辣酱，配以炸豆腐与天贝，香辣过瘾、大口满足！", 
-        "images": ["assets/ayam-penyet-menu.png", "assets/ayam-penyet.png"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "鮨匠 Shokunin Nihonryori": {
-        "desc": "秉承传统日本料理匠人精神，精选新鲜海鲜与优质食材。现场湛然手艺捏制寿司与刺身，为您带来精致优雅的正宗日式美味！", 
-        "images": ["assets/sushi-stall.jpg", "assets/japanese-rice.png", "assets/sushi-1.webp", "assets/sushi.png"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "苦瓜猪杂汤": {
-        "desc": "每日新鲜熬制清甜高汤，苦瓜甘甘回甜、去油解腻。严选新鲜猪杂无腥味，汤头鲜美爽口，暖胃又健康！", 
-        "images": ["assets/rou-geng-tang-stall.jpeg", "assets/rou-geng-tang.png", "assets/rou-geng-tang1.png"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "中国江西小炒": {
-        "desc": "地道江西家乡风味，坚持大火爆炒、锅气十足。菜品鲜辣咸香、十分下饭，为你还原最纯正的东方烟火气", 
-        "images": ["assets/jiangxi-stall.jpeg", "assets/jiangxi.png", ""],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "面粉糕 板面": {
-        "desc": "坚持每日手工现捏现切，面条Q弹牙有劲道。搭配鲜甜江鱼仔高汤与香脆猪油渣，纯手工打造最怀念的家常味！", 
-        "images": ["", "", ""],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "烧鸡翅": {
-        "desc": "独家秘制香料深度腌制，炭火慢烤至金黄诱人。外皮焦香微脆、肉汁鲜嫩紧锁，蘸上特制辣椒酱更是绝配", 
-        "images": ["assets/chicken-wing-stall.jpeg", "assets/chicken-wing.png"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "面粉糕 炸虾面": {
-        "desc": "精选整只大鲜虾炸至金黄酥脆，搭配特制浓郁浓香汤头与弹牙面条。一口鲜虾一口面，鲜甜浓郁、满足感拉满！", 
-        "images": ["assets/fried-prawn-noodles-stall.jpeg", "assets/fried-prawn-noodles.png", "assets/fried-prawn-noodles1.png"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "串串小子": {
-        "desc": "", 
-        "images": ["assets/chuanchuan-stall.jpeg", "assets/chuanchuan.png"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "Ah Chin Satay": {
-        "desc": "", 
-        "images": ["assets/satay-stall.jpeg", "assets/satay.png"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "云吞面": {
-        "desc": "", 
-        "images": ["assets/wantan-stall.jpeg", "assets/wantan.png", ""],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "五香烧卖 蚝煎": {
-        "desc": "", 
-        "images": ["assets/oyster-fried.jpeg", "assets/oyster-fried.png", "assets/oyster-fried1.png"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
-      },
-      "新口味煮炒": {
-        "desc": "", 
-        "images": ["assets/stir-fry-stall.jpg", "assets/stir-fry.png", "assets/stir-fry1.jpg"],
-        "hours": "10:00 AM — 9:00 PM",
-        "days": "星期一至星期日"
+    // --- 1. 从 Sanity 动态获取菜品数据 ---
+    window.foodDescriptions = {}; // 改为全局变量，供原本的弹窗逻辑使用
+
+    // 【重要】把你刚在 Sanity 后台拿到的 Project ID 和 Dataset 填在下面
+    const PROJECT_ID = 'kp5rkziu'; 
+    const DATASET = 'production'; 
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      const foodGrid = document.getElementById('dynamicFoodGrid');
+      
+      if (foodGrid) {
+        // 使用 GROQ 语法向 Sanity 查询数据，并自动将图片转为可用 URL
+        const query = encodeURIComponent(`*[_type == "foodItem"]{
+          title,
+          description,
+          "coverImage": coverImage.asset->url,
+          "galleryImages": galleryImages[].asset->url,
+          hours,
+          days
+        }`);
+        
+        const url = `https://${PROJECT_ID}.api.sanity.io/v2022-03-07/data/query/${DATASET}?query=${query}`;
+
+        try {
+          const response = await fetch(url);
+          const { result } = await response.json();
+
+          // 清空加载状态
+          foodGrid.innerHTML = '';
+
+          result.forEach(item => {
+            // 1. 将数据存入字典，完美兼容你原本的 openFoodModal 逻辑
+            window.foodDescriptions[item.title] = {
+              desc: item.description || "档口筹备中，敬请期待！",
+              images: item.galleryImages || [item.coverImage || "", "", ""],
+              hours: item.hours || "10:00 AM — 9:00 PM",
+              days: item.days || "星期一至星期日"
+            };
+
+            // 2. 动态生成卡片 HTML
+            const card = document.createElement('article');
+            card.className = 'food-card';
+            card.setAttribute('onclick', 'openFoodModal(this)');
+            card.innerHTML = `
+              <img src="${item.coverImage || ''}" alt="${item.title}">
+              <b>${item.title}</b>
+            `;
+            foodGrid.appendChild(card);
+          });
+        } catch (error) {
+          console.error('获取美食数据失败:', error);
+          foodGrid.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">菜单加载中，请稍后再试...</p>';
+        }
       }
-    };
+    });
 
     // --- 2. 弹窗与轮播图逻辑 ---
     var currentSlideIndex = 0;
